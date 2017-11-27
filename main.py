@@ -1,16 +1,19 @@
 """
 Simple jumper game
 """
-import os
-import sys
-import pygame
 import random
+import pygame
 
 
 class Player(pygame.sprite.Sprite):
+    """
+    Player sprite
+
+    Knows how to move and die
+    """
     def __init__(self):
         super().__init__()
-        self.image = pygame.Surface([5,5])
+        self.image = pygame.Surface([5, 5])
         self.image.fill((255, 0, 0))
         self.rect = self.image.get_rect()
         self.rect.topleft = random.randrange(10, 200), random.randrange(5, 50)
@@ -21,6 +24,9 @@ class Player(pygame.sprite.Sprite):
         self.size = self.image.get_size()
 
     def handle_keys(self):
+        """
+        Check keys and change movement
+        """
         # move left and right and jump
         key = pygame.key.get_pressed()
         if key[pygame.K_UP] and not self.inair:
@@ -31,6 +37,9 @@ class Player(pygame.sprite.Sprite):
             self.dx -= 1
 
     def update(self, walls):
+        """
+        Handle movement and dieing etc.
+        """
         # apply gravity
         self.rect.y += self.dy
 
@@ -56,19 +65,22 @@ class Player(pygame.sprite.Sprite):
             self.inair = 1
 
         # check if we died
-        w, h = pygame.display.get_surface().get_size()
-        if self.rect.y > h:
+        if self.rect.y > pygame.display.get_surface().get_size()[1]:
             print("Ded")
             pygame.quit()
 
+
 class Wall(pygame.sprite.Sprite):
+    """
+    Wall sprite
+    """
     def __init__(self):
         super().__init__()
         # random size from screen
         w, h = pygame.display.get_surface().get_size()
         self.image = pygame.Surface([
-                random.randrange(w/20,w/10),
-                random.randrange(h/20,h/10)
+            random.randrange(w/20, w/10),
+            random.randrange(h/20, h/10)
         ])
         self.image.fill((255, 255, 255))
         self.rect = self.image.get_rect()
@@ -77,6 +89,9 @@ class Wall(pygame.sprite.Sprite):
 
 
 def main():
+    """
+    Main. Runs the loop
+    """
     # initialize pygame
     pygame.init()
 
@@ -88,11 +103,10 @@ def main():
     # and clock
     clock = pygame.time.Clock()
 
-
     # background
     background = pygame.Surface(screen.get_size())
     background = background.convert()
-    background.fill((0,0,0))
+    background.fill((0, 0, 0))
 
     # render background
     screen.blit(background, (0, 0))
@@ -131,7 +145,7 @@ def main():
         # check keypresses for player
         player.handle_keys()
 
-        screen.blit(background, (0,0))
+        screen.blit(background, (0, 0))
         allsprites.draw(screen)
         pygame.display.flip()
 
