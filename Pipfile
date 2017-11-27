@@ -1,0 +1,22 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[dev-packages]
+
+
+
+[packages]
+
+"flake8" = "*"
+"pep8" = "*"
+pylint = "*"
+pygame = "*"
+
+
+[requires]
+
+python_version = "3.6"
