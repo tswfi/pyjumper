@@ -4,5 +4,5 @@ PyGame jumper
 
 ## Running
 
-pipenv install
-pipenv run python main.py
+    pipenv install
+    pipenv run python main.py
