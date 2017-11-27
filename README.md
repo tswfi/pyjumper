@@ -2,7 +2,7 @@
 
 PyGame jumper
 
-![Screenshot of the game}(screenshot.png?raw=True)
+![Screenshot of the game](screenshot.png?raw=True)
 
 ## Running
 
